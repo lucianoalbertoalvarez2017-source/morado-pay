@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard — Morado Pay</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body class="dashboard-body">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <a href="index.html" class="logo">
+            <span class="logo-mark">◆</span>
+            <span class="logo-text">Morado<span class="accent">Pay</span></span>
+        </a>
+        <nav class="sidebar-nav">
+            <a href="#" class="sb-link active">
+                <span class="sb-icon">▣</span> Dashboard
+            </a>
+            <a href="#" class="sb-link">
+                <span class="sb-icon">↓</span> Recibir
+            </a>
+            <a href="#" class="sb-link">
+                <span class="sb-icon">↑</span> Enviar
+            </a>
+            <a href="#" class="sb-link">
+                <span class="sb-icon">⇄</span> Convertir
+            </a>
+            <a href="#" class="sb-link">
+                <span class="sb-icon">💳</span> Tarjeta
+            </a>
+            <a href="#" class="sb-link">
+                <span class="sb-icon">📊</span> Historial
+            </a>
+            <a href="#" class="sb-link">
+                <span class="sb-icon">⚙</span> Configuración
+            </a>
+        </nav>
+        <div class="sidebar-user">
+            <div class="avatar">LM</div>
+            <div>
+                <strong>Lucia M.</strong>
+                <span>Plan Pro</span>
+            </div>
+        </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+        <header class="topbar">
+            <div>
+                <h1>Hola, Lucia 👋</h1>
+                <p class="subtitle">Acá está tu resumen de hoy.</p>
+            </div>
+            <div class="topbar-actions">
+                <button class="btn-ghost btn-sm">🔔</button>
+                <a href="#" class="btn-primary btn-sm" onclick="openModal('receive'); return false;">
+                    + Recibir dinero
+                </a>
+            </div>
+        </header>
+
+        <!-- BALANCE HERO -->
+        <section class="balance-hero">
+            <div class="balance-label">Saldo total</div>
+            <div class="balance-amount">
+                <span class="balance-symbol">$</span>
+                <span id="balance">12,847.50</span>
+                <span class="balance-currency">USD</span>
+            </div>
+            <div class="balance-change">
+                <span class="up">↑ +$2,340.00</span> esta semana
+            </div>
+            <div class="balance-actions">
+                <button class="action-btn" onclick="openModal('send')">
+                    <div class="action-icon">↑</div>
+                    <span>Enviar</span>
+                </button>
+                <button class="action-btn" onclick="openModal('receive')">
+                    <div class="action-icon">↓</div>
+                    <span>Recibir</span>
+                </button>
+                <button class="action-btn" onclick="openModal('convert')">
+                    <div class="action-icon">⇄</div>
+                    <span>Convertir</span>
+                </button>
+                <button class="action-btn" onclick="openModal('crypto')">
+                    <div class="action-icon">₿</div>
+                    <span>Cripto</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- GRID -->
+        <div class="grid-2">
+            <!-- ACCOUNT INFO -->
+            <section class="panel">
+                <div class="panel-header">
+                    <h2>Tu cuenta bancaria US</h2>
+                    <button class="link-btn" onclick="copyAccount()">📋 Copiar todo</button>
+                </div>
+                <dl class="account-info">
+                    <div>
+                        <dt>Account holder</dt>
+                        <dd>Lucia Morado</dd>
+                    </div>
+                    <div>
+                        <dt>Account number</dt>
+                        <dd class="mono" id="acctNumber">8421 7593 2046 1208</dd>
+                    </div>
+                    <div>
+                        <dt>Routing (ACH)</dt>
+                        <dd class="mono">026073150</dd>
+                    </div>
+                    <div>
+                        <dt>Routing (Wire)</dt>
+                        <dd class="mono">026073008</dd>
+                    </div>
+                    <div>
+                        <dt>Bank</dt>
+                        <dd>Community Federal Savings Bank</dd>
+                    </div>
+                    <div>
+                        <dt>Bank address</dt>
+                        <dd>89 E Broadway, New York, NY 10002</dd>
+                    </div>
+                </dl>
+            </section>
+
+            <!-- CONVERT RATES -->
+            <section class="panel">
+                <div class="panel-header">
+                    <h2>Tipos de cambio</h2>
+                    <span class="updated">Actualizado hace 12s</span>
+                </div>
+                <div class="rates">
+                    <div class="rate-row">
+                        <div class="rate-currency">
+                            <span class="flag">🇪🇨</span>
+                            <div>
+                                <strong>USD → USD</strong>
+                                <span>Ecuador</span>
+                            </div>
+                        </div>
+                        <div class="rate-value">1.000</div>
+                    </div>
+                    <div class="rate-row">
+                        <div class="rate-currency">
+                            <span class="flag">🇦🇷</span>
+                            <div>
+                                <strong>USD → ARS</strong>
+                                <span>Argentina (blue)</span>
+                            </div>
+                        </div>
+                        <div class="rate-value">1,355.00</div>
+                    </div>
+                    <div class="rate-row">
+                        <div class="rate-currency">
+                            <span class="flag">🇲🇽</span>
+                            <div>
+                                <strong>USD → MXN</strong>
+                                <span>México</span>
+                            </div>
+                        </div>
+                        <div class="rate-value">17.42</div>
+                    </div>
+                    <div class="rate-row">
+                        <div class="rate-currency">
+                            <span class="flag">🇨🇴</span>
+                            <div>
+                                <strong>USD → COP</strong>
+                                <span>Colombia</span>
+                            </div>
+                        </div>
+                        <div class="rate-value">4,021.00</div>
+                    </div>
+                    <div class="rate-row">
+                        <div class="rate-currency">
+                            <span class="flag">₿</span>
+                            <div>
+                                <strong>USD → USDT</strong>
+                                <span>Tether</span>
+                            </div>
+                        </div>
+                        <div class="rate-value">0.9985</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- TRANSACTIONS -->
+        <section class="panel">
+            <div class="panel-header">
+                <h2>Últimas transacciones</h2>
+                <a href="#" class="link-btn">Ver todas →</a>
+            </div>
+            <div class="tx-list">
+                <div class="tx-row">
+                    <div class="tx-icon green">↓</div>
+                    <div class="tx-info">
+                        <strong>Acme Studios LLC</strong>
+                        <span>Wire transfer — Diseño UX proyecto Q2</span>
+                    </div>
+                    <div class="tx-date">Hoy, 14:22</div>
+                    <div class="tx-amount green">+$2,500.00</div>
+                </div>
+                <div class="tx-row">
+                    <div class="tx-icon">⇄</div>
+                    <div class="tx-info">
+                        <strong>Conversión a ARS</strong>
+                        <span>$500.00 → AR$ 677,500</span>
+                    </div>
+                    <div class="tx-date">Hoy, 11:05</div>
+                    <div class="tx-amount">-$500.00</div>
+                </div>
+                <div class="tx-row">
+                    <div class="tx-icon green">↓</div>
+                    <div class="tx-info">
+                        <strong>Stripe Atlas</strong>
+                        <span>ACH — Pago mensual de cliente</span>
+                    </div>
+                    <div class="tx-date">Ayer, 16:48</div>
+                    <div class="tx-amount green">+$1,200.00</div>
+                </div>
+                <div class="tx-row">
+                    <div class="tx-icon">💳</div>
+                    <div class="tx-info">
+                        <strong>Amazon</strong>
+                        <span>Tarjeta débito — Compra en línea</span>
+                    </div>
+                    <div class="tx-date">Ayer, 12:33</div>
+                    <div class="tx-amount">-$87.50</div>
+                </div>
+                <div class="tx-row">
+                    <div class="tx-icon orange">₿</div>
+                    <div class="tx-info">
+                        <strong>Retiro USDT</strong>
+                        <span>Network: TRC20 — Wallet: TXa7...vK2p</span>
+                    </div>
+                    <div class="tx-date">15 May, 09:14</div>
+                    <div class="tx-amount">-$300.00</div>
+                </div>
+                <div class="tx-row">
+                    <div class="tx-icon green">↓</div>
+                    <div class="tx-info">
+                        <strong>Zelle: Mark Chen</strong>
+                        <span>Pago freelance — Mockups web</span>
+                    </div>
+                    <div class="tx-date">14 May, 18:02</div>
+                    <div class="tx-amount green">+$850.00</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- MODAL DE ACCIONES (genérico) -->
+    <div id="actionModal" class="modal-overlay" onclick="if(event.target===this) closeModal()">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal()">×</button>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>

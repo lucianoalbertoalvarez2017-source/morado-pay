@@ -1,0 +1,384 @@
+/* ============================================================
+   SIGNUP — Estilos del flow de creación de cuenta
+   ============================================================ */
+
+.signup-body {
+    min-height: 100vh;
+    background:
+        radial-gradient(ellipse at top, var(--accent-glow), transparent 60%),
+        var(--bg);
+    display: flex;
+    flex-direction: column;
+}
+
+.signup-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 32px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(10, 10, 15, 0.5);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+}
+
+.signup-main {
+    flex: 1;
+    max-width: 560px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 40px 24px 60px;
+}
+
+/* ============ PROGRESS ============ */
+.progress-bar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px;
+    gap: 8px;
+}
+
+.progress-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.progress-step span {
+    font-size: 12px;
+    color: var(--text-mute);
+    font-weight: 500;
+}
+
+.progress-circle {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--bg-card);
+    border: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: var(--text-mute);
+    transition: all 0.3s;
+}
+
+.progress-step.active .progress-circle {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+    box-shadow: 0 0 20px var(--accent-glow);
+}
+
+.progress-step.active span {
+    color: var(--text);
+}
+
+.progress-step.done .progress-circle {
+    background: var(--green);
+    border-color: var(--green);
+    color: white;
+}
+
+.progress-line {
+    flex: 1;
+    height: 2px;
+    background: var(--border);
+    margin-bottom: 26px;
+    transition: background 0.3s;
+}
+
+.progress-line.done { background: var(--green); }
+
+/* ============ STEP PANEL ============ */
+.step-panel {
+    display: none;
+    animation: slideIn 0.3s ease-out;
+}
+
+.step-panel.active {
+    display: block;
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.step-panel h1 {
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+}
+
+.step-sub {
+    color: var(--text-dim);
+    font-size: 16px;
+    margin-bottom: 32px;
+}
+
+/* ============ FORMS ============ */
+.step-panel form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.step-panel label {
+    display: block;
+    font-size: 13px;
+    color: var(--text-dim);
+    font-weight: 500;
+}
+
+.step-panel input,
+.step-panel select {
+    display: block;
+    width: 100%;
+    margin-top: 6px;
+    padding: 14px 16px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text);
+    font-size: 15px;
+    outline: none;
+    transition: all 0.15s;
+    font-family: inherit;
+}
+
+.step-panel input:focus,
+.step-panel select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.step-panel select {
+    cursor: pointer;
+}
+
+.hint {
+    display: block;
+    margin-top: 6px;
+    font-size: 12px;
+    color: var(--text-mute);
+}
+
+.row-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.check {
+    display: flex !important;
+    align-items: flex-start;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.check input {
+    width: auto !important;
+    margin-top: 2px !important;
+    accent-color: var(--accent);
+}
+
+.check span {
+    color: var(--text-dim);
+    font-size: 13px;
+}
+
+.check a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+/* ============ DIVIDER ============ */
+.divider {
+    display: flex;
+    align-items: center;
+    margin: 24px 0;
+    gap: 12px;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+}
+
+.divider span {
+    color: var(--text-mute);
+    font-size: 13px;
+}
+
+.signup-foot {
+    text-align: center;
+    margin-top: 24px;
+    color: var(--text-dim);
+    font-size: 14px;
+}
+
+.signup-foot a {
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+/* ============ STEP BUTTONS ============ */
+.step-buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.flex-1 { flex: 1; }
+
+/* ============ UPLOAD ============ */
+.upload-area {
+    border: 2px dashed var(--border);
+    border-radius: 12px;
+    padding: 32px 24px;
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 16px;
+    transition: all 0.15s;
+    background: var(--bg-card);
+}
+
+.upload-area:hover {
+    border-color: var(--accent);
+    background: var(--bg-elevated);
+}
+
+.upload-area.has-file {
+    border-color: var(--green);
+    border-style: solid;
+}
+
+.upload-icon {
+    font-size: 40px;
+    margin-bottom: 12px;
+}
+
+.upload-area h3 {
+    font-size: 16px;
+    margin-bottom: 6px;
+}
+
+.upload-area p {
+    color: var(--text-dim);
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+.upload-preview {
+    margin-top: 16px;
+}
+
+.upload-preview img {
+    max-width: 200px;
+    max-height: 140px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+}
+
+.upload-preview .filename {
+    color: var(--green);
+    font-size: 14px;
+    font-weight: 600;
+    padding: 8px 14px;
+    background: rgba(34, 197, 94, 0.1);
+    border-radius: 8px;
+    display: inline-block;
+}
+
+.security-note {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 18px;
+    color: var(--text-dim);
+    font-size: 13px;
+    margin: 16px 0 24px;
+}
+
+/* ============ SUCCESS ============ */
+.success-box {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.success-check {
+    margin: 0 auto 24px;
+    display: inline-block;
+    animation: bounce 0.6s ease-out;
+}
+
+@keyframes bounce {
+    0% { transform: scale(0); opacity: 0; }
+    60% { transform: scale(1.1); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.success-box h1 {
+    text-align: center;
+}
+
+.success-box .step-sub {
+    text-align: center;
+    max-width: 440px;
+    margin: 0 auto 32px;
+}
+
+.welcome-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    text-align: left;
+    margin-bottom: 24px;
+}
+
+.welcome-card h3 {
+    font-size: 14px;
+    color: var(--text-dim);
+    margin-bottom: 16px;
+    font-weight: 500;
+}
+
+.welcome-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 14px;
+}
+
+.welcome-details strong { color: var(--text-dim); margin-right: 8px; }
+
+/* ============ GOOGLE BUTTON ============ */
+.google-btn-wrap {
+    display: flex;
+    justify-content: center;
+    margin: 4px 0 8px;
+}
+
+.google-btn-wrap > div {
+    width: 100%;
+    max-width: 380px;
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 600px) {
+    .step-panel h1 { font-size: 28px; }
+    .progress-step span { display: none; }
+    .progress-bar { margin-bottom: 32px; }
+    .row-2 { grid-template-columns: 1fr; }
+    .signup-header { padding: 16px 20px; }
+}

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear cuenta — Morado Pay</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="signup.css">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body class="signup-body">
+    <header class="signup-header">
+        <a href="index.html" class="logo">
+            <span class="logo-mark">◆</span>
+            <span class="logo-text">Morado<span class="accent">Pay</span></span>
+        </a>
+        <a href="index.html" class="btn-ghost btn-sm">← Volver</a>
+    </header>
+
+    <main class="signup-main">
+        <!-- BARRA DE PROGRESO -->
+        <div class="progress-bar">
+            <div class="progress-step active" data-step="1">
+                <div class="progress-circle">1</div>
+                <span>Cuenta</span>
+            </div>
+            <div class="progress-line"></div>
+            <div class="progress-step" data-step="2">
+                <div class="progress-circle">2</div>
+                <span>Datos</span>
+            </div>
+            <div class="progress-line"></div>
+            <div class="progress-step" data-step="3">
+                <div class="progress-circle">3</div>
+                <span>Identidad</span>
+            </div>
+            <div class="progress-line"></div>
+            <div class="progress-step" data-step="4">
+                <div class="progress-circle">✓</div>
+                <span>Listo</span>
+            </div>
+        </div>
+
+        <!-- ============ PASO 1: EMAIL + PASSWORD ============ -->
+        <section class="step-panel active" data-panel="1">
+            <h1>Crea tu cuenta</h1>
+            <p class="step-sub">Empezá a recibir USD en menos de 2 minutos.</p>
+
+            <form onsubmit="event.preventDefault(); goToStep(2)">
+                <label>
+                    Email
+                    <input type="email" id="email" required placeholder="vos@email.com">
+                </label>
+                <label>
+                    Contraseña
+                    <input type="password" id="password" required placeholder="Mínimo 8 caracteres" minlength="8">
+                    <span class="hint">Usá mayúsculas, números y símbolos.</span>
+                </label>
+                <label>
+                    Confirmar contraseña
+                    <input type="password" id="password2" required placeholder="Repetí tu contraseña" minlength="8">
+                </label>
+                <label class="check">
+                    <input type="checkbox" required>
+                    <span>Acepto los <a href="#">términos</a> y la <a href="#">política de privacidad</a></span>
+                </label>
+                <button type="submit" class="btn-primary btn-lg btn-full">Continuar →</button>
+            </form>
+
+            <div class="divider"><span>o</span></div>
+
+            <div id="g_id_onload"
+                 data-client_id="998172918791-iq787qhp0jqggl3r335s20gptdqn2e4t.apps.googleusercontent.com"
+                 data-callback="handleGoogleSignIn"
+                 data-auto_select="false"
+                 data-itp_support="true"></div>
+            <div class="google-btn-wrap">
+                <div class="g_id_signin"
+                     data-type="standard"
+                     data-shape="rectangular"
+                     data-theme="filled_black"
+                     data-text="continue_with"
+                     data-size="large"
+                     data-locale="es"
+                     data-logo_alignment="left"
+                     data-width="380"></div>
+            </div>
+
+            <p class="signup-foot">
+                ¿Ya tenés cuenta? <a href="index.html">Iniciar sesión</a>
+            </p>
+        </section>
+
+        <!-- ============ PASO 2: DATOS PERSONALES ============ -->
+        <section class="step-panel" data-panel="2">
+            <h1>Contanos sobre vos</h1>
+            <p class="step-sub">Necesitamos esto para abrir tu cuenta bancaria US.</p>
+
+            <form onsubmit="event.preventDefault(); goToStep(3)">
+                <div class="row-2">
+                    <label>
+                        Nombre
+                        <input type="text" id="firstName" required placeholder="Lucia">
+                    </label>
+                    <label>
+                        Apellido
+                        <input type="text" id="lastName" required placeholder="Morado">
+                    </label>
+                </div>
+
+                <label>
+                    País de residencia
+                    <select id="country" required>
+                        <option value="">Elegir país...</option>
+                        <option value="EC">🇪🇨 Ecuador</option>
+                        <option value="AR">🇦🇷 Argentina</option>
+                        <option value="MX">🇲🇽 México</option>
+                        <option value="CO">🇨🇴 Colombia</option>
+                        <option value="CL">🇨🇱 Chile</option>
+                        <option value="PE">🇵🇪 Perú</option>
+                        <option value="VE">🇻🇪 Venezuela</option>
+                        <option value="UY">🇺🇾 Uruguay</option>
+                        <option value="BR">🇧🇷 Brasil</option>
+                    </select>
+                </label>
+
+                <label>
+                    Fecha de nacimiento
+                    <input type="date" id="dob" required>
+                </label>
+
+                <label>
+                    Número de teléfono
+                    <input type="tel" id="phone" required placeholder="+593 99 123 4567">
+                </label>
+
+                <label>
+                    ¿A qué te dedicás?
+                    <select id="job" required>
+                        <option value="">Elegí una opción...</option>
+                        <option>Freelancer (diseño, desarrollo, copywriting)</option>
+                        <option>Empleado en relación de dependencia</option>
+                        <option>Dueño de negocio / emprendedor</option>
+                        <option>Trader / inversor</option>
+                        <option>Estudiante</option>
+                        <option>Otro</option>
+                    </select>
+                </label>
+
+                <div class="step-buttons">
+                    <button type="button" class="btn-ghost btn-lg" onclick="goToStep(1)">← Atrás</button>
+                    <button type="submit" class="btn-primary btn-lg flex-1">Continuar →</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- ============ PASO 3: VERIFICACIÓN IDENTIDAD ============ -->
+        <section class="step-panel" data-panel="3">
+            <h1>Verificá tu identidad</h1>
+            <p class="step-sub">Subí una foto del frente de tu DNI o cédula. Es para protegerte contra fraudes.</p>
+
+            <div class="upload-area" onclick="document.getElementById('docFile').click()">
+                <div class="upload-icon">📷</div>
+                <h3>Frente del documento</h3>
+                <p>Click para subir o arrastrá una foto</p>
+                <p class="hint">JPG, PNG o PDF — máx 10MB</p>
+                <input type="file" id="docFile" accept="image/*,.pdf" onchange="onFilePicked(this, 'docPreview')" hidden>
+                <div id="docPreview" class="upload-preview"></div>
+            </div>
+
+            <div class="upload-area" onclick="document.getElementById('selfieFile').click()">
+                <div class="upload-icon">🤳</div>
+                <h3>Selfie con tu documento</h3>
+                <p>Sosté el documento al lado de tu cara</p>
+                <p class="hint">Asegurate que se vean bien los dos</p>
+                <input type="file" id="selfieFile" accept="image/*" onchange="onFilePicked(this, 'selfiePreview')" hidden>
+                <div id="selfiePreview" class="upload-preview"></div>
+            </div>
+
+            <div class="security-note">
+                🔒 Tus documentos se cifran y se borran después de la verificación. Nadie los puede ver excepto el verificador.
+            </div>
+
+            <div class="step-buttons">
+                <button type="button" class="btn-ghost btn-lg" onclick="goToStep(2)">← Atrás</button>
+                <button type="button" class="btn-primary btn-lg flex-1" onclick="finishSignup()">
+                    Crear cuenta
+                </button>
+            </div>
+        </section>
+
+        <!-- ============ PASO 4: ÉXITO ============ -->
+        <section class="step-panel" data-panel="4">
+            <div class="success-box">
+                <div class="success-check">
+                    <svg viewBox="0 0 52 52" width="80" height="80">
+                        <circle cx="26" cy="26" r="25" fill="none" stroke="#22c55e" stroke-width="2"/>
+                        <path fill="none" stroke="#22c55e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M14 27 l8 8 l16 -18"/>
+                    </svg>
+                </div>
+                <h1>¡Cuenta creada! 🎉</h1>
+                <p class="step-sub">
+                    Tu cuenta está activa. La verificación de identidad tarda 5-10 minutos
+                    y te avisamos por email cuando esté lista para recibir transferencias.
+                </p>
+
+                <div class="welcome-card">
+                    <h3>Tu cuenta US ya está disponible:</h3>
+                    <div class="welcome-details">
+                        <div><strong>Account:</strong> <span class="mono">8421 7593 2046 1208</span></div>
+                        <div><strong>Routing ACH:</strong> <span class="mono">026073150</span></div>
+                        <div><strong>Banco:</strong> Community Federal Savings</div>
+                    </div>
+                </div>
+
+                <a href="dashboard.html" class="btn-primary btn-lg btn-full">Ir al dashboard →</a>
+                <p class="signup-foot">
+                    Te enviamos un email a <strong id="finalEmail">tu email</strong> con todos los detalles.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <script src="signup.js"></script>
+</body>
+</html>
