@@ -211,6 +211,45 @@ app.get('/api/health', (req, res) => {
     res.json({ ok: true, time: Date.now() });
 });
 
+// ============ Debug: prueba Upstash directamente ============
+app.get('/api/debug', async (req, res) => {
+    const result = {
+        env: {
+            UPSTASH_REDIS_REST_URL: process.env.UPSTASH_REDIS_REST_URL ? 'SET (' + process.env.UPSTASH_REDIS_REST_URL.slice(0, 30) + '...)' : 'MISSING',
+            UPSTASH_REDIS_REST_TOKEN: process.env.UPSTASH_REDIS_REST_TOKEN ? 'SET (length ' + process.env.UPSTASH_REDIS_REST_TOKEN.length + ', starts with ' + process.env.UPSTASH_REDIS_REST_TOKEN.slice(0, 6) + '...)' : 'MISSING',
+            GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID ? 'SET' : 'MISSING',
+            NODE_ENV: process.env.NODE_ENV || 'not set',
+        },
+        tests: {},
+    };
+
+    // Test 1: SET
+    try {
+        await redis.set('debug:test', 'hello-' + Date.now());
+        result.tests.set = 'OK';
+    } catch (e) {
+        result.tests.set = 'FAIL: ' + e.message;
+    }
+
+    // Test 2: GET
+    try {
+        const v = await redis.get('debug:test');
+        result.tests.get = 'OK (value: ' + v + ')';
+    } catch (e) {
+        result.tests.get = 'FAIL: ' + e.message;
+    }
+
+    // Test 3: DEL
+    try {
+        await redis.del('debug:test');
+        result.tests.del = 'OK';
+    } catch (e) {
+        result.tests.del = 'FAIL: ' + e.message;
+    }
+
+    res.json(result);
+});
+
 // ============ Static (frontend) ============
 app.use(express.static(path.join(__dirname, 'public')));
 
