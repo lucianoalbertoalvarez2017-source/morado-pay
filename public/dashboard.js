@@ -197,15 +197,102 @@ const modals = {
         </label>
         <button class="btn-primary btn-lg btn-full" onclick="doCrypto()">Retirar</button>
     `,
+    card: `
+        <h2>Tu tarjeta de débito</h2>
+        <p class="modal-desc">Mastercard virtual en USD. Pedila física desde la app móvil.</p>
+        <div class="card-preview">
+            <div class="card-brand">◆ MoradoPay</div>
+            <div class="card-number" id="cardNumber">4521 ●●●● ●●●● 8302</div>
+            <div class="card-row">
+                <div>
+                    <div class="card-label">TITULAR</div>
+                    <div class="card-value" id="cardHolder">—</div>
+                </div>
+                <div>
+                    <div class="card-label">EXPIRA</div>
+                    <div class="card-value">12/29</div>
+                </div>
+                <div>
+                    <div class="card-label">CVV</div>
+                    <div class="card-value">●●●</div>
+                </div>
+            </div>
+        </div>
+        <button class="btn-ghost btn-lg btn-full" onclick="alert('La función pedir tarjeta física estará disponible próximamente')">Pedir tarjeta física</button>
+    `,
+    settings: `
+        <h2>Configuración</h2>
+        <div class="settings-list">
+            <div class="setting-row">
+                <div>
+                    <strong>Email</strong>
+                    <span id="settingsEmail">—</span>
+                </div>
+            </div>
+            <div class="setting-row">
+                <div>
+                    <strong>Nombre</strong>
+                    <span id="settingsName">—</span>
+                </div>
+            </div>
+            <div class="setting-row">
+                <div>
+                    <strong>País</strong>
+                    <span id="settingsCountry">—</span>
+                </div>
+            </div>
+            <div class="setting-row">
+                <div>
+                    <strong>Método de login</strong>
+                    <span id="settingsProvider">—</span>
+                </div>
+            </div>
+            <div class="setting-row">
+                <div>
+                    <strong>Cuenta creada</strong>
+                    <span id="settingsCreated">—</span>
+                </div>
+            </div>
+        </div>
+        <button class="btn-ghost btn-lg btn-full" onclick="closeModal()">Cerrar</button>
+    `,
 };
+
+function scrollToTransactions() {
+    const el = document.getElementById('transactions');
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+async function doLogout() {
+    try {
+        await fetch('/api/logout', { method: 'POST', credentials: 'same-origin' });
+    } catch {}
+    window.location.href = '/index.html';
+}
 
 function openModal(type) {
     document.getElementById('modalContent').innerHTML = modals[type];
     document.getElementById('actionModal').classList.add('active');
     document.body.style.overflow = 'hidden';
-    if (type === 'receive' && CURRENT_USER) {
+
+    if (!CURRENT_USER) return;
+    const fullName = `${CURRENT_USER.firstName || ''} ${CURRENT_USER.lastName || ''}`.trim() || CURRENT_USER.email;
+
+    if (type === 'receive') {
         const h = document.getElementById('rcvHolder');
-        if (h) h.textContent = `${CURRENT_USER.firstName || ''} ${CURRENT_USER.lastName || ''}`.trim() || CURRENT_USER.email;
+        if (h) h.textContent = fullName;
+    }
+    if (type === 'card') {
+        const h = document.getElementById('cardHolder');
+        if (h) h.textContent = fullName.toUpperCase();
+    }
+    if (type === 'settings') {
+        const set = (id, val) => { const e = document.getElementById(id); if (e) e.textContent = val; };
+        set('settingsEmail', CURRENT_USER.email || '—');
+        set('settingsName', fullName);
+        set('settingsCountry', CURRENT_USER.country || 'No especificado');
+        set('settingsProvider', CURRENT_USER.provider === 'google' ? 'Google' : 'Email + contraseña');
+        set('settingsCreated', CURRENT_USER.createdAt ? new Date(CURRENT_USER.createdAt).toLocaleDateString('es') : '—');
     }
 }
 

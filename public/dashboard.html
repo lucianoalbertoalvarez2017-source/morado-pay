@@ -15,26 +15,29 @@
             <span class="logo-text">Morado<span class="accent">Pay</span></span>
         </a>
         <nav class="sidebar-nav">
-            <a href="#" class="sb-link active">
+            <a href="dashboard.html" class="sb-link active">
                 <span class="sb-icon">▣</span> Dashboard
             </a>
-            <a href="#" class="sb-link">
+            <a href="#" class="sb-link" onclick="openModal('receive'); return false;">
                 <span class="sb-icon">↓</span> Recibir
             </a>
-            <a href="#" class="sb-link">
+            <a href="#" class="sb-link" onclick="openModal('send'); return false;">
                 <span class="sb-icon">↑</span> Enviar
             </a>
-            <a href="#" class="sb-link">
+            <a href="#" class="sb-link" onclick="openModal('convert'); return false;">
                 <span class="sb-icon">⇄</span> Convertir
             </a>
-            <a href="#" class="sb-link">
+            <a href="#" class="sb-link" onclick="openModal('card'); return false;">
                 <span class="sb-icon">💳</span> Tarjeta
             </a>
-            <a href="#" class="sb-link">
+            <a href="#" class="sb-link" onclick="scrollToTransactions(); return false;">
                 <span class="sb-icon">📊</span> Historial
             </a>
-            <a href="#" class="sb-link">
+            <a href="#" class="sb-link" onclick="openModal('settings'); return false;">
                 <span class="sb-icon">⚙</span> Configuración
+            </a>
+            <a href="#" class="sb-link sb-link-danger" onclick="doLogout(); return false;">
+                <span class="sb-icon">⏻</span> Cerrar sesión
             </a>
         </nav>
         <div class="sidebar-user">
@@ -190,7 +193,7 @@
         </div>
 
         <!-- TRANSACTIONS -->
-        <section class="panel">
+        <section id="transactions" class="panel">
             <div class="panel-header">
                 <h2>Últimas transacciones</h2>
                 <a href="#" class="link-btn">Ver todas →</a>

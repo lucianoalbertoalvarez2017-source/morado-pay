@@ -57,6 +57,16 @@
     color: white;
 }
 
+.sb-link-danger {
+    margin-top: auto;
+    color: var(--red);
+}
+
+.sb-link-danger:hover {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--red);
+}
+
 .sb-icon {
     font-size: 18px;
     width: 20px;
@@ -478,6 +488,80 @@
 
 .success-state h2 { margin-bottom: 8px; }
 .success-state p { color: var(--text-dim); margin-bottom: 24px; }
+
+/* ============ CARD PREVIEW ============ */
+.card-preview {
+    background: linear-gradient(135deg, var(--accent) 0%, #ec4899 50%, var(--accent-dark) 100%);
+    border-radius: 16px;
+    padding: 24px;
+    color: white;
+    margin-bottom: 20px;
+    aspect-ratio: 1.586;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 12px 40px var(--accent-glow);
+}
+
+.card-brand {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.card-number {
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-size: 22px;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+}
+
+.card-row {
+    display: flex;
+    gap: 24px;
+}
+
+.card-label {
+    font-size: 9px;
+    opacity: 0.7;
+    letter-spacing: 0.1em;
+    margin-bottom: 4px;
+}
+
+.card-value {
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* ============ SETTINGS ============ */
+.settings-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 20px;
+}
+
+.setting-row {
+    padding: 14px 16px;
+    background: var(--bg);
+    border-radius: 10px;
+}
+
+.setting-row strong {
+    display: block;
+    font-size: 12px;
+    color: var(--text-dim);
+    font-weight: 500;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.setting-row span {
+    font-size: 15px;
+    color: var(--text);
+}
 
 /* ============ RESPONSIVE ============ */
 @media (max-width: 900px) {
