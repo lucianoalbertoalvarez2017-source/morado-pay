@@ -417,6 +417,68 @@
     font-family: "SF Mono", Menlo, Consolas, monospace;
 }
 
+/* ============ MODAL EXTRAS ============ */
+.modal-desc {
+    color: var(--text-dim);
+    margin-bottom: 20px;
+}
+
+.receive-info {
+    background: var(--bg);
+    padding: 16px;
+    border-radius: 10px;
+    margin-bottom: 16px;
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.select-styled {
+    display: block;
+    width: 100%;
+    margin-top: 6px;
+    padding: 12px 16px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text);
+    font-size: 15px;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.convert-result {
+    background: var(--bg);
+    padding: 16px;
+    border-radius: 10px;
+    margin-bottom: 16px;
+}
+
+.convert-label { color: var(--text-dim); font-size: 13px; margin-bottom: 4px; }
+.convert-amount { font-size: 28px; font-weight: 800; color: var(--green); }
+.convert-fee { color: var(--text-mute); font-size: 12px; margin-top: 4px; }
+
+.success-state {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.success-state .success-circle {
+    width: 80px;
+    height: 80px;
+    background: var(--green);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 40px;
+    color: white;
+}
+
+.success-state h2 { margin-bottom: 8px; }
+.success-state p { color: var(--text-dim); margin-bottom: 24px; }
+
 /* ============ RESPONSIVE ============ */
 @media (max-width: 900px) {
     .dashboard-body { grid-template-columns: 1fr; }

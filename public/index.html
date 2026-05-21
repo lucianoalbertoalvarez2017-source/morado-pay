@@ -222,7 +222,7 @@
         <div class="modal">
             <button class="modal-close" onclick="closeLogin()">×</button>
             <h2>Iniciar sesión</h2>
-            <form onsubmit="event.preventDefault(); window.location='dashboard.html'">
+            <form onsubmit="doLogin(event)">
                 <label>
                     Email
                     <input type="email" required placeholder="vos@email.com">

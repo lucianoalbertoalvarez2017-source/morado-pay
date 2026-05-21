@@ -1,39 +1,26 @@
 // ============================================================
-// SIGNUP — Navegación de pasos + Google Sign-In + uploads
+// SIGNUP — Navegación de pasos + Google Sign-In + API
 // ============================================================
 
 let currentStep = 1;
 
 // Callback que llama Google después del login
-window.handleGoogleSignIn = function(response) {
-    // El JWT viene en response.credential
-    const payload = JSON.parse(atob(response.credential.split('.')[1]));
-    // payload tiene: email, name, given_name, family_name, picture, sub, etc.
+window.handleGoogleSignIn = async function(response) {
+    try {
+        const r = await fetch('/api/google-auth', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ credential: response.credential }),
+            credentials: 'same-origin',
+        });
+        const data = await r.json();
+        if (!r.ok) throw new Error(data.error || 'Error en Google Auth');
 
-    // Guardar datos en sessionStorage para usar en dashboard
-    sessionStorage.setItem('user', JSON.stringify({
-        email: payload.email,
-        name: payload.name,
-        firstName: payload.given_name,
-        lastName: payload.family_name,
-        picture: payload.picture,
-        provider: 'google'
-    }));
-
-    // Pre-llenar paso 1 (si vuelve atrás) y saltar al paso 2
-    const emailInput = document.getElementById('email');
-    if (emailInput) emailInput.value = payload.email;
-
-    // Ir al paso 2
-    goToStep(2);
-
-    // Pre-llenar paso 2 (después de que se muestre)
-    setTimeout(() => {
-        const fn = document.getElementById('firstName');
-        const ln = document.getElementById('lastName');
-        if (fn && payload.given_name) fn.value = payload.given_name;
-        if (ln && payload.family_name) ln.value = payload.family_name;
-    }, 100);
+        // Cuenta creada/iniciada — al dashboard
+        window.location.href = '/dashboard.html';
+    } catch (err) {
+        alert('No se pudo iniciar con Google: ' + err.message);
+    }
 };
 
 function goToStep(n) {
@@ -85,7 +72,7 @@ function onFilePicked(input, previewId) {
     }
 }
 
-function finishSignup() {
+async function finishSignup() {
     // Validar que ambos archivos estén subidos
     const doc = document.getElementById('docFile').files[0];
     const selfie = document.getElementById('selfieFile').files[0];
@@ -95,9 +82,32 @@ function finishSignup() {
         return;
     }
 
-    // Mostrar email en paso 4
-    const email = document.getElementById('email').value || 'tu email';
-    document.getElementById('finalEmail').textContent = email;
+    // Llamar al backend con todos los datos recopilados
+    const body = {
+        email:     document.getElementById('email').value,
+        password:  document.getElementById('password').value,
+        firstName: document.getElementById('firstName').value,
+        lastName:  document.getElementById('lastName').value,
+        country:   document.getElementById('country').value,
+        phone:     document.getElementById('phone').value,
+        dob:       document.getElementById('dob').value,
+        job:       document.getElementById('job').value,
+    };
 
-    goToStep(4);
+    try {
+        const r = await fetch('/api/signup', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body),
+            credentials: 'same-origin',
+        });
+        const data = await r.json();
+        if (!r.ok) throw new Error(data.error || 'Error al crear cuenta');
+
+        // Mostrar email en paso 4 y avanzar
+        document.getElementById('finalEmail').textContent = body.email;
+        goToStep(4);
+    } catch (err) {
+        alert('No se pudo crear la cuenta: ' + err.message);
+    }
 }
